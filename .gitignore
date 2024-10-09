@@ -1,0 +1,8 @@
+# Ignore the "folder_name" folder
+.vs/
+bin/
+obj/
+.idea/
+node_modules/
+.vscode/
+wwwroot/lib/
