@@ -6,8 +6,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DPO.Models;
 
-[Table("File")]
-public partial class File
+[Table("Department")]
+public partial class Department
 {
     [Key]
     [Column("id")]
@@ -15,9 +15,10 @@ public partial class File
 
     public string? Name { get; set; }
 
-    public string? Url { get; set; }
+    public string? Email { get; set; }
 
-    [ForeignKey("IdFile")]
-    [InverseProperty("IdFiles")]
-    public virtual ICollection<Case> IdCases { get; set; } = new List<Case>();
+    public string? Code { get; set; }
+
+    [InverseProperty("IdDepartmentNavigation")]
+    public virtual ICollection<Account> Accounts { get; set; } = new List<Account>();
 }

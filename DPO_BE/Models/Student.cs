@@ -25,6 +25,13 @@ public partial class Student
 
     public string? Major { get; set; }
 
-    [InverseProperty("MsvStudentNavigation")]
+    [Column("SDT")]
+    public string? Sdt { get; set; }
+
+    public string? Email { get; set; }
+
+    public bool? IsMale { get; set; }
+
+    [InverseProperty("IdStudentNavigation")]
     public virtual ICollection<Account> Accounts { get; set; } = new List<Account>();
 }

@@ -9,24 +9,31 @@ namespace DPO.Models;
 [Table("Account")]
 public partial class Account
 {
+    public string? Username { get; set; }
+
+    [Column("idDepartment")]
+    public int? IdDepartment { get; set; }
+
     [Key]
     [Column("id")]
     public int Id { get; set; }
-
-    public string? Username { get; set; }
 
     public string? Password { get; set; }
 
     public string? Role { get; set; }
 
+    [Column("idStudent")]
     [StringLength(50)]
-    public string? MsvStudent { get; set; }
+    public string? IdStudent { get; set; }
 
-    [ForeignKey("Id")]
-    [InverseProperty("Account")]
-    public virtual Case IdNavigation { get; set; } = null!;
+    [InverseProperty("IdAccountNavigation")]
+    public virtual ICollection<Case> Cases { get; set; } = new List<Case>();
 
-    [ForeignKey("MsvStudent")]
+    [ForeignKey("IdDepartment")]
     [InverseProperty("Accounts")]
-    public virtual Student? MsvStudentNavigation { get; set; }
+    public virtual Department? IdDepartmentNavigation { get; set; }
+
+    [ForeignKey("IdStudent")]
+    [InverseProperty("Accounts")]
+    public virtual Student? IdStudentNavigation { get; set; }
 }

@@ -6,9 +6,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DPO.Models;
 
-[Table("Procedure")]
-[Index("Id", Name = "IX_Procedure", IsUnique = true)]
-public partial class Procedure
+[Table("ResultFrom")]
+public partial class ResultFrom
 {
     [Key]
     [Column("id")]
@@ -16,17 +15,8 @@ public partial class Procedure
 
     public string? Name { get; set; }
 
-    public string? Description { get; set; }
-
-    public int? Fee { get; set; }
-
-    public int? Level { get; set; }
-
     public string? Code { get; set; }
 
-    [InverseProperty("IdProcedureNavigation")]
+    [InverseProperty("IdResultFormNavigation")]
     public virtual ICollection<Case> Cases { get; set; } = new List<Case>();
-
-    [InverseProperty("IdProcedureNavigation")]
-    public virtual ICollection<OrderProcedure> OrderProcedures { get; set; } = new List<OrderProcedure>();
 }
