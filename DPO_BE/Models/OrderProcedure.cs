@@ -21,6 +21,10 @@ public partial class OrderProcedure
     [Column("idDepartment")]
     public int? IdDepartment { get; set; }
 
+    [ForeignKey("IdDepartment")]
+    [InverseProperty("OrderProcedures")]
+    public virtual Department? IdDepartmentNavigation { get; set; }
+
     [ForeignKey("IdProcedure")]
     [InverseProperty("OrderProcedures")]
     public virtual Procedure? IdProcedureNavigation { get; set; }

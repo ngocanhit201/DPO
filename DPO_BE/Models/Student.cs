@@ -9,14 +9,16 @@ namespace DPO.Models;
 [Table("Student")]
 public partial class Student
 {
+    [Key]
+    [Column("id")]
+    public int Id { get; set; }
+
     public string? Name { get; set; }
 
     [Column(TypeName = "datetime")]
     public DateTime? Birthday { get; set; }
 
-    [Key]
     [Column("MSV")]
-    [StringLength(50)]
     public string Msv { get; set; } = null!;
 
     public string? Class { get; set; }

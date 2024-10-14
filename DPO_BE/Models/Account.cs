@@ -18,13 +18,12 @@ public partial class Account
     [Column("id")]
     public int Id { get; set; }
 
+    [Column("idStudent")]
+    public int? IdStudent { get; set; }
+
     public string? Password { get; set; }
 
     public string? Role { get; set; }
-
-    [Column("idStudent")]
-    [StringLength(50)]
-    public string? IdStudent { get; set; }
 
     [InverseProperty("IdAccountNavigation")]
     public virtual ICollection<Case> Cases { get; set; } = new List<Case>();

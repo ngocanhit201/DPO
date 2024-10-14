@@ -15,15 +15,6 @@ namespace DPO.Controllers
         {
         }
 
-        [HttpGet]
-        public async Task<IActionResult> ListProcedure()
-        {
-            var procedures = _context.Procedures.ToList();
-            var acc = _context.Accounts.ToList();
-            var accDto = _mapper.Map<List<AccountDTO>>(acc);
-            accDto.Add(new AccountDTO());
-            return Ok(accDto);
-        }
        
 
     }

@@ -9,6 +9,10 @@ namespace DPO.Models;
 [Table("Case")]
 public partial class Case
 {
+    [Column("idCaseProgress")]
+    [StringLength(10)]
+    public string? IdCaseProgress { get; set; }
+
     [Column("idAccount")]
     public int IdAccount { get; set; }
 
@@ -19,9 +23,6 @@ public partial class Case
     [Column("id")]
     public int Id { get; set; }
 
-    [Column("idState")]
-    public int? IdState { get; set; }
-
     public string? DateDone { get; set; }
 
     [StringLength(10)]
@@ -31,6 +32,12 @@ public partial class Case
     public int? IdResultForm { get; set; }
 
     public string? Require { get; set; }
+
+    [InverseProperty("IdCaseNavigation")]
+    public virtual ICollection<CaseProgress> CaseProgresses { get; set; } = new List<CaseProgress>();
+
+    [InverseProperty("IdCaseNavigation")]
+    public virtual ICollection<File> Files { get; set; } = new List<File>();
 
     [ForeignKey("IdAccount")]
     [InverseProperty("Cases")]
@@ -43,12 +50,4 @@ public partial class Case
     [ForeignKey("IdResultForm")]
     [InverseProperty("Cases")]
     public virtual ResultFrom? IdResultFormNavigation { get; set; }
-
-    [ForeignKey("IdState")]
-    [InverseProperty("Cases")]
-    public virtual State? IdStateNavigation { get; set; }
-
-    [ForeignKey("IdCase")]
-    [InverseProperty("IdCases")]
-    public virtual ICollection<File> IdFiles { get; set; } = new List<File>();
 }

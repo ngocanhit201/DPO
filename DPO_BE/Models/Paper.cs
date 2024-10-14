@@ -6,8 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DPO.Models;
 
-[Table("State")]
-public partial class State
+public partial class Paper
 {
     [Key]
     [Column("id")]
@@ -17,6 +16,7 @@ public partial class State
 
     public string? Code { get; set; }
 
-    [InverseProperty("IdStatusNavigation")]
-    public virtual ICollection<CaseProgress> CaseProgresses { get; set; } = new List<CaseProgress>();
+    [ForeignKey("IdPaper")]
+    [InverseProperty("IdPapers")]
+    public virtual ICollection<Procedure> IdProcedures { get; set; } = new List<Procedure>();
 }

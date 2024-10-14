@@ -3,6 +3,7 @@ using DPO.Mapper.MapModel;
 using DPO.Models;
 using DPO.Utils;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace DPO.Controllers
 {
@@ -14,7 +15,7 @@ namespace DPO.Controllers
         [HttpGet]
         public async Task<IActionResult> Login(string username, string password)
         {
-            var user = _context.Accounts.FirstOrDefault(e => e.Password == password && e.Username == username);
+            var user = _context.Accounts.Include(e => e.IdStudentNavigation).Include(e=> e.IdDepartmentNavigation).FirstOrDefault(e => e.Password == password && e.Username == username);
             if (user == null)
             {
                 return BadRequest("Not fond");

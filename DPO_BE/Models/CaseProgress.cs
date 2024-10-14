@@ -6,21 +6,23 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DPO.Models;
 
-[Table("File")]
-public partial class File
+[Table("CaseProgress")]
+public partial class CaseProgress
 {
     [Key]
     [Column("id")]
     public int Id { get; set; }
 
-    public string? Name { get; set; }
+    [Column("idStatus")]
+    public int? IdStatus { get; set; }
 
-    [Column("idCase")]
     public int? IdCase { get; set; }
 
-    public string? Url { get; set; }
-
     [ForeignKey("IdCase")]
-    [InverseProperty("Files")]
+    [InverseProperty("CaseProgresses")]
     public virtual Case? IdCaseNavigation { get; set; }
+
+    [ForeignKey("IdStatus")]
+    [InverseProperty("CaseProgresses")]
+    public virtual State? IdStatusNavigation { get; set; }
 }

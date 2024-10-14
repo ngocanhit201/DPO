@@ -19,11 +19,15 @@ public partial class StudentProceduresOnlineContext : DbContext
 
     public virtual DbSet<Case> Cases { get; set; }
 
+    public virtual DbSet<CaseProgress> CaseProgresses { get; set; }
+
     public virtual DbSet<Department> Departments { get; set; }
 
     public virtual DbSet<File> Files { get; set; }
 
     public virtual DbSet<OrderProcedure> OrderProcedures { get; set; }
+
+    public virtual DbSet<Paper> Papers { get; set; }
 
     public virtual DbSet<Procedure> Procedures { get; set; }
 
@@ -41,19 +45,17 @@ public partial class StudentProceduresOnlineContext : DbContext
     {
         modelBuilder.Entity<Account>(entity =>
         {
-            entity.Property(e => e.IdStudent).IsFixedLength();
-
             entity.HasOne(d => d.IdDepartmentNavigation).WithMany(p => p.Accounts).HasConstraintName("FK_Account_Department");
 
-            entity.HasOne(d => d.IdStudentNavigation).WithMany(p => p.Accounts).HasConstraintName("FK_Account_Student1");
+            entity.HasOne(d => d.IdStudentNavigation).WithMany(p => p.Accounts).HasConstraintName("FK_Account_Student");
         });
 
         modelBuilder.Entity<Case>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK_Case_1");
 
-            entity.Property(e => e.Id).ValueGeneratedNever();
             entity.Property(e => e.Comment).IsFixedLength();
+            entity.Property(e => e.IdCaseProgress).IsFixedLength();
 
             entity.HasOne(d => d.IdAccountNavigation).WithMany(p => p.Cases)
                 .OnDelete(DeleteBehavior.ClientSetNull)
@@ -64,8 +66,13 @@ public partial class StudentProceduresOnlineContext : DbContext
                 .HasConstraintName("fk_Case_Procedure_1");
 
             entity.HasOne(d => d.IdResultFormNavigation).WithMany(p => p.Cases).HasConstraintName("FK_Case_ResultFrom");
+        });
 
-            entity.HasOne(d => d.IdStateNavigation).WithMany(p => p.Cases).HasConstraintName("FK_Case_State");
+        modelBuilder.Entity<CaseProgress>(entity =>
+        {
+            entity.HasOne(d => d.IdCaseNavigation).WithMany(p => p.CaseProgresses).HasConstraintName("FK_CaseProgress_Case");
+
+            entity.HasOne(d => d.IdStatusNavigation).WithMany(p => p.CaseProgresses).HasConstraintName("FK_CaseProgress_State");
         });
 
         modelBuilder.Entity<File>(entity =>
@@ -74,36 +81,41 @@ public partial class StudentProceduresOnlineContext : DbContext
 
             entity.Property(e => e.Id).ValueGeneratedNever();
 
-            entity.HasMany(d => d.IdCases).WithMany(p => p.IdFiles)
-                .UsingEntity<Dictionary<string, object>>(
-                    "CaseFile",
-                    r => r.HasOne<Case>().WithMany()
-                        .HasForeignKey("IdCase")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("FK_CaseFile_Case"),
-                    l => l.HasOne<File>().WithMany()
-                        .HasForeignKey("IdFile")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("FK_ProcedureFile_File"),
-                    j =>
-                    {
-                        j.HasKey("IdFile", "IdCase").HasName("PK__Procedur__CBA8538643CF0ECF");
-                        j.ToTable("CaseFile");
-                        j.IndexerProperty<int>("IdFile").HasColumnName("idFile");
-                        j.IndexerProperty<int>("IdCase").HasColumnName("idCase");
-                    });
+            entity.HasOne(d => d.IdCaseNavigation).WithMany(p => p.Files).HasConstraintName("FK_File_Case");
         });
 
         modelBuilder.Entity<OrderProcedure>(entity =>
         {
+            entity.HasOne(d => d.IdDepartmentNavigation).WithMany(p => p.OrderProcedures).HasConstraintName("FK_OrderProcedure_Department");
+
             entity.HasOne(d => d.IdProcedureNavigation).WithMany(p => p.OrderProcedures).HasConstraintName("FK_OrderProcedure_Procedure");
+        });
+
+        modelBuilder.Entity<Procedure>(entity =>
+        {
+            entity.HasMany(d => d.IdPapers).WithMany(p => p.IdProcedures)
+                .UsingEntity<Dictionary<string, object>>(
+                    "ProcedurePaper",
+                    r => r.HasOne<Paper>().WithMany()
+                        .HasForeignKey("IdPaper")
+                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .HasConstraintName("FK_ProcedurePaper_Papers"),
+                    l => l.HasOne<Procedure>().WithMany()
+                        .HasForeignKey("IdProcedure")
+                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .HasConstraintName("FK_ProcedurePaper_Procedure"),
+                    j =>
+                    {
+                        j.HasKey("IdProcedure", "IdPaper");
+                        j.ToTable("ProcedurePaper");
+                        j.IndexerProperty<int>("IdProcedure").HasColumnName("idProcedure");
+                        j.IndexerProperty<int>("IdPaper").HasColumnName("idPaper");
+                    });
         });
 
         modelBuilder.Entity<Student>(entity =>
         {
-            entity.HasKey(e => e.Msv).HasName("PK__Student__C790E5ACF54E8CEA");
-
-            entity.Property(e => e.Msv).IsFixedLength();
+            entity.HasKey(e => e.Id).HasName("PK_Student_1");
         });
 
         OnModelCreatingPartial(modelBuilder);

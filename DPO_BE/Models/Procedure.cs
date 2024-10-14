@@ -29,4 +29,8 @@ public partial class Procedure
 
     [InverseProperty("IdProcedureNavigation")]
     public virtual ICollection<OrderProcedure> OrderProcedures { get; set; } = new List<OrderProcedure>();
+
+    [ForeignKey("IdProcedure")]
+    [InverseProperty("IdProcedures")]
+    public virtual ICollection<Paper> IdPapers { get; set; } = new List<Paper>();
 }

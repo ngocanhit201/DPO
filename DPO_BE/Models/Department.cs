@@ -21,4 +21,7 @@ public partial class Department
 
     [InverseProperty("IdDepartmentNavigation")]
     public virtual ICollection<Account> Accounts { get; set; } = new List<Account>();
+
+    [InverseProperty("IdDepartmentNavigation")]
+    public virtual ICollection<OrderProcedure> OrderProcedures { get; set; } = new List<OrderProcedure>();
 }
