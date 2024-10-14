@@ -131,3 +131,22 @@ code {
   background-color: rgb(var(--mui-palette-info-mainChannel) / 0.08);
   border: 0;
 }
+/* filepond */
+/* .filepond--root,
+.filepond--root .filepond--drop-label {
+  height: 100px;
+} */
+.filepond--item {
+  width: calc(10% - 0.5em);
+}
+@media (min-width: 30em) {
+  .filepond--item {
+      width: calc(50% - 0.5em);
+  }
+}
+
+@media (min-width: 50em) {
+  .filepond--item {
+      width: calc(33.33% - 0.5em);
+  }
+}

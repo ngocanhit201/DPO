@@ -39,7 +39,7 @@ const LoginV2 = ({ mode }: { mode: Mode }) => {
 
   // Vars
   const darkImg = '/images/pages/auth-v2-mask-1-dark.png'
-  const lightImg = '/images/pages/auth-v2-mask-1-light.png'
+  const lightImg = 'https://dainam.edu.vn/uploads/images/ydnu08vevx9gj9uqj9rc20230719085807_thump.jpg'
   const darkIllustration = '/images/illustrations/auth/v2-login-dark.png'
   const lightIllustration = '/images/illustrations/auth/v2-login-light.png'
   const borderedDarkIllustration = '/images/illustrations/auth/v2-login-dark-border.png'
@@ -70,19 +70,19 @@ const LoginV2 = ({ mode }: { mode: Mode }) => {
           }
         )}
       >
-        <div className='pli-6 max-lg:mbs-40 lg:mbe-24'>
+        {/* <div className='pli-6 max-lg:mbs-40 lg:mbe-24'>
           <img
             src={characterIllustration}
             alt='character-illustration'
             className='max-bs-[673px] max-is-full bs-auto'
           />
-        </div>
+        </div> */}
         <img src={authBackground} className='absolute bottom-[4%] z-[-1] is-full max-md:hidden' />
       </div>
       <div className='flex justify-center items-center bs-full bg-backgroundPaper !min-is-full p-6 md:!min-is-[unset] md:p-12 md:is-[480px]'>
-        <Link className='absolute block-start-5 sm:block-start-[38px] inline-start-6 sm:inline-start-[38px]'>
+        {/* <Link className='absolute block-start-5 sm:block-start-[38px] inline-start-6 sm:inline-start-[38px]'>
           <Logo />
-        </Link>
+        </Link> */}
         <div className='flex flex-col gap-5 is-full sm:is-auto md:is-full sm:max-is-[400px] md:max-is-[unset] mbs-11 sm:mbs-14 md:mbs-0'>
           <div>
             <Typography variant='h4'>{`Welcome to ${themeConfig.templateName}! 👋🏻`}</Typography>

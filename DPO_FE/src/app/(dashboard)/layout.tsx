@@ -17,7 +17,7 @@ import Navbar from '@components/layout/vertical/Navbar'
 import VerticalFooter from '@components/layout/vertical/Footer'
 import HorizontalFooter from '@components/layout/horizontal/Footer'
 import ScrollToTop from '@core/components/scroll-to-top'
-
+import UserLayout from '@/components/UserLayout'
 // Util Imports
 import { getMode, getSystemMode } from '@core/utils/serverHelpers'
 
@@ -26,7 +26,6 @@ const Layout = async ({ children }: ChildrenType) => {
   const direction = 'ltr'
   const mode = getMode()
   const systemMode = getSystemMode()
-
   return (
     <Providers direction={direction}>
       <LayoutWrapper

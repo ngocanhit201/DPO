@@ -3,6 +3,7 @@
 // React Imports
 import { useEffect, useRef } from 'react'
 import type { CSSProperties } from 'react'
+import Image from 'next/image'
 
 // Third-party Imports
 import styled from '@emotion/styled'
@@ -19,6 +20,7 @@ import themeConfig from '@configs/themeConfig'
 // Hook Imports
 import useVerticalNav from '@menu/hooks/useVerticalNav'
 import { useSettings } from '@core/hooks/useSettings'
+import { tree } from 'next/dist/build/templates/app-page'
 
 type LogoTextProps = {
   isHovered?: VerticalNavContextProps['isHovered']
@@ -73,7 +75,8 @@ const Logo = ({ color }: { color?: CSSProperties['color'] }) => {
 
   return (
     <div className='flex items-center min-bs-[24px]'>
-      <MaterializeLogo />
+      <img src="/images/dainam.png" alt="" width={400} />
+
       <LogoText
         color={color}
         ref={logoTextRef}

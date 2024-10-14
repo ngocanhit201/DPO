@@ -1,7 +1,7 @@
 'use client'
 
 // React Imports
-import { useRef, useState } from 'react'
+import { useContext, useRef, useState } from 'react'
 import type { MouseEvent } from 'react'
 
 // Next Imports
@@ -20,7 +20,8 @@ import Typography from '@mui/material/Typography'
 import Divider from '@mui/material/Divider'
 import MenuItem from '@mui/material/MenuItem'
 import Button from '@mui/material/Button'
-
+import { UserContext } from '@/components/UserLayout'
+import { deleteCookie } from '@/utils/getSetCookie'
 // Hook Imports
 import { useSettings } from '@core/hooks/useSettings'
 
@@ -64,8 +65,10 @@ const UserDropdown = () => {
 
   const handleUserLogout = async () => {
     // Redirect to login page
+    deleteCookie('account')
     router.push('/login')
   }
+  const user = useContext(UserContext)
 
   return (
     <>
@@ -109,23 +112,19 @@ const UserDropdown = () => {
                     <Avatar alt='John Doe' src='/images/avatars/1.png' />
                     <div className='flex items-start flex-col'>
                       <Typography variant='body2' className='font-medium' color='text.primary'>
-                        John Doe
+                        {user?.username}
                       </Typography>
-                      <Typography variant='caption'>admin@materialize.com</Typography>
+                      <Typography variant='caption'>dainam@gmail.com</Typography>
                     </div>
                   </div>
                   <Divider className='mlb-1' />
                   <MenuItem className='gap-3 pli-4' onClick={e => handleDropdownClose(e)}>
                     <i className='ri-user-3-line' />
-                    <Typography color='text.primary'>My Profile</Typography>
+                    <Typography color='text.primary'>Cá nhân</Typography>
                   </MenuItem>
                   <MenuItem className='gap-3 pli-4' onClick={e => handleDropdownClose(e)}>
                     <i className='ri-settings-4-line' />
-                    <Typography color='text.primary'>Settings</Typography>
-                  </MenuItem>
-                  <MenuItem className='gap-3 pli-4' onClick={e => handleDropdownClose(e)}>
-                    <i className='ri-money-dollar-circle-line' />
-                    <Typography color='text.primary'>Pricing</Typography>
+                    <Typography color='text.primary'>Cài đặt</Typography>
                   </MenuItem>
                   <MenuItem className='gap-3 pli-4' onClick={e => handleDropdownClose(e)}>
                     <i className='ri-question-line' />
@@ -140,7 +139,7 @@ const UserDropdown = () => {
                       endIcon={<i className='ri-logout-box-r-line' />}
                       onClick={handleUserLogout}
                     >
-                      Logout
+                      Đăng xuất
                     </Button>
                   </div>
                 </MenuList>
@@ -154,3 +153,4 @@ const UserDropdown = () => {
 }
 
 export default UserDropdown
+
