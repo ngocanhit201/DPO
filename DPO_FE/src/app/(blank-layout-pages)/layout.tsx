@@ -41,9 +41,6 @@ export default function Layout({
 
   useEffect(() => {
     setDomLoaded(true)
-    let setIcon = ` <link rel="icon" type="image/png" href="https://dainam.edu.vn/admin/upload/news/old_sys/DNU-Brand_636893623888557216.png" />`
-    let header = document.getElementsByTagName('head')[0]
-    header.insertAdjacentHTML('beforeend', setIcon)
   }, [])
 
   return (

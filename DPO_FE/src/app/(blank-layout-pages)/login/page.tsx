@@ -1,15 +1,15 @@
 'use client'
 import { Box, Button, Card, FormControl, FormLabel, Link, TextField, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
+import { use, useContext, useEffect, useState } from "react";
 import loginApi from './../../../api/loginApi';
 import { setCookieNoTime, getCookie, getAccFromCookie } from '../../../utils/getSetCookie';
 import { json } from "stream/consumers";
 import { useRouter } from 'next/navigation'
-
+import { UserContext } from '@/components/UserLayout'
 export default function page() {
     let [username, setUsername] = useState<string>('');
     let [password, setPassword] = useState<string>('');
-    let [account, setAccount] = useState<Account>();
+    let user = useContext(UserContext);
     const router = useRouter();
 
     function handleUsernameChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -26,14 +26,12 @@ export default function page() {
         async function fetchData() {
             let account = await loginApi(username, password)
             if (account) {
-                setAccount(pre => account);
+                // setAccount(pre => account);
                 setCookieNoTime('account', account);
-
-            }
-            let myacc = getAccFromCookie();
-            if (myacc?.idStudent != null) {
+                user?.setAccount(account);
                 router.push('/home')
             }
+
         }
 
         fetchData();

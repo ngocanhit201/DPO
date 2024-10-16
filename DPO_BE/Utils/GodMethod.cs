@@ -88,5 +88,10 @@ namespace DPO.Utils
             }
             return true;
         }
+       public static string ConcatWithSlash(List<string> strings)
+        {
+            // Use string.Join to concatenate the list with '/' as the delimiter
+            return string.Join("/", strings);
+        }
     }
 }

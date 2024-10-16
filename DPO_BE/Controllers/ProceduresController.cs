@@ -45,10 +45,10 @@ namespace DPO.Controllers
             return Ok(id);
         }
         [HttpGet]
-        public async Task<IActionResult> GetByProcedureCode(string code)
+        public async Task<IActionResult> GetByProcedureById(int id)
         {
             var x = _context.Procedures.ToList();
-            var procedure = _context.Procedures.Include(p => p.OrderProcedures).ThenInclude(op => op.IdDepartmentNavigation).Include(p => p.IdPapers).FirstOrDefault(p => p.Code == code);
+            var procedure = _context.Procedures.Include(p => p.OrderProcedures).ThenInclude(op => op.IdDepartmentNavigation).Include(p => p.IdPapers).FirstOrDefault(p => p.Id == id);
             if (procedure == null)
             {
                 return BadRequest("Not found");

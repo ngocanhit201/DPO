@@ -1,3 +1,4 @@
+
 // Third-party Imports
 import 'react-perfect-scrollbar/dist/css/styles.css'
 
@@ -8,8 +9,10 @@ import type { ChildrenType } from '@core/types'
 import '@/app/globals.css'
 
 // Generated Icon CSS Imports
+
 import '@assets/iconify-icons/generated-icons.css'
 import UserLayout from '@/components/UserLayout'
+import { useEffect } from 'react'
 
 export const metadata = {
   title: 'Một cửa ĐẠI NAM',
@@ -19,6 +22,7 @@ export const metadata = {
 const RootLayout = ({ children }: ChildrenType) => {
   // Vars
   const direction = 'ltr'
+
 
   return (
     <html id='__next' lang='en' dir={direction} suppressHydrationWarning={true}>

@@ -30,7 +30,8 @@ interface Case {
     idAccount: number;
     idProcedure: number;
     id: number;
-    dateDone: string;
+    dateDone: Date;
+    dateCreate: Date;
     comment: string;
     idResultForm: number;
     require: string;

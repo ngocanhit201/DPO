@@ -86,21 +86,24 @@ namespace DPO.Controllers
 
                 IdProcedure = @case.IdProcedure,
                 IdResultForm = @case.IdResultForm,
-              
+                DateCreate = DateTime.Now,
+
             };
-           
+
             _context.Cases.Add(myCase);
             await _context.SaveChangesAsync();
 
-            if (@case.files != null) {
+            if (@case.files != null)
+            {
                 string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Uploads", @case.IdAccount.ToString(), myCase.Id.ToString());
-                foreach (var file in @case.files) { 
+                foreach (var file in @case.files)
+                {
                     GodMethod.UploadFile(file, path);
                     _context.Files.Add(new Models.File()
                     {
                         IdCase = myCase.Id,
                         Name = file.Name,
-                        Url = path+'\\'+file.Name
+                        Url = GodMethod.ConcatWithSlash(new List<string>() { "Uploads", @case.IdAccount.ToString(), myCase.Id.ToString(), file.FileName })
 
                     });
                     await _context.SaveChangesAsync();
@@ -108,12 +111,12 @@ namespace DPO.Controllers
                 }
 
             }
-        
-
-            
 
 
-           return Ok(myCase);
+
+
+
+            return Ok(myCase);
         }
 
         // DELETE: api/Cases/5

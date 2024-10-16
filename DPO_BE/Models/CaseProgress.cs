@@ -16,11 +16,18 @@ public partial class CaseProgress
     [Column("idStatus")]
     public int? IdStatus { get; set; }
 
+    [Column("idDepartment")]
+    public int? IdDepartment { get; set; }
+
     public int? IdCase { get; set; }
 
     [ForeignKey("IdCase")]
     [InverseProperty("CaseProgresses")]
     public virtual Case? IdCaseNavigation { get; set; }
+
+    [ForeignKey("IdDepartment")]
+    [InverseProperty("CaseProgresses")]
+    public virtual Department? IdDepartmentNavigation { get; set; }
 
     [ForeignKey("IdStatus")]
     [InverseProperty("CaseProgresses")]

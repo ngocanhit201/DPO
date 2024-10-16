@@ -8,10 +8,10 @@ import ProcedureForm from '@/components/ProcedureForm';
 export default function Page() {
     const searchParams = useSearchParams()
     let [procedure, setprocedure] = useState<Procedure | null>(null);
-    const code = searchParams.get('code') || '';
+    const id = searchParams.get('id');
     useEffect(() => {
         async function fetchData() {
-            let data = await getDetailProcedure(code);
+            let data = await getDetailProcedure(Number(id));
             setprocedure(pre => data);
         }
         fetchData();
@@ -19,7 +19,7 @@ export default function Page() {
     }, [])
     return (
         <>
-            {procedure && <ProcedureForm procedure={procedure} />}
+            {procedure && <ProcedureForm procedure={procedure}  />}
         </>
     );
 }

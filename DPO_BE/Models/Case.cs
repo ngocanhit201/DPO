@@ -23,7 +23,11 @@ public partial class Case
     [Column("id")]
     public int Id { get; set; }
 
-    public string? DateDone { get; set; }
+    [Column(TypeName = "datetime")]
+    public DateTime? DateCreate { get; set; }
+
+    [Column(TypeName = "datetime")]
+    public DateTime? DateDone { get; set; }
 
     [StringLength(10)]
     public string? Comment { get; set; }

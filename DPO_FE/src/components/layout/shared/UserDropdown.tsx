@@ -112,7 +112,7 @@ const UserDropdown = () => {
                     <Avatar alt='John Doe' src='/images/avatars/1.png' />
                     <div className='flex items-start flex-col'>
                       <Typography variant='body2' className='font-medium' color='text.primary'>
-                        {user?.username}
+                        {user?.account?.username}
                       </Typography>
                       <Typography variant='caption'>dainam@gmail.com</Typography>
                     </div>

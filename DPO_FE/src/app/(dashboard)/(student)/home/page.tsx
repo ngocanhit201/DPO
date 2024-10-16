@@ -18,11 +18,12 @@ export default function Page() {
   const router = useRouter();
 
   const user = useContext(UserContext)
-  if (user == null) {
+  console.log("myuser", user)
+  if (user?.account == null) {
     router.push('/login')
   };
-  function handlePushToDetail(code: string) {
-    router.push(`/procedure?code=${code}`);
+  function handlePushToDetail(id: number) {
+    router.push(`/procedure?id=${id}`);
   }
   useEffect(() => {
     async function fetchData() {
@@ -51,7 +52,7 @@ export default function Page() {
                 key={row.code}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 className='hover:bg-gray-100 cursor-pointer'
-                onClick={() => handlePushToDetail(row.code)}
+                onClick={() => handlePushToDetail(row.id)}
               >
                 <TableCell component="th" scope="row">
                   {index + 1}

@@ -19,15 +19,19 @@ import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css'
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview)
 
 // Our app
-export default function App() {
+export default function App({ onValueChange }) {
     const [files, setFiles] = useState([])
-    // console.log(files[0].file.name)
+    const handleInputFileChange = (value) => {
+        setFiles(value)
+        onValueChange(value)
+        console.log(files)
+    };
     return (
         <>
             <div >
                 <FilePond
                     files={files}
-                    onupdatefiles={setFiles}
+                    onupdatefiles={handleInputFileChange}
                     allowMultiple={true}
                     name="files" /* sets the file input name, it's filepond by default */
                     labelIdle='Nhấp để tải lên<span class="filepond--label-action"></span>'

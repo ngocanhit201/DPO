@@ -72,14 +72,14 @@ public partial class StudentProceduresOnlineContext : DbContext
         {
             entity.HasOne(d => d.IdCaseNavigation).WithMany(p => p.CaseProgresses).HasConstraintName("FK_CaseProgress_Case");
 
+            entity.HasOne(d => d.IdDepartmentNavigation).WithMany(p => p.CaseProgresses).HasConstraintName("FK_CaseProgress_Department");
+
             entity.HasOne(d => d.IdStatusNavigation).WithMany(p => p.CaseProgresses).HasConstraintName("FK_CaseProgress_State");
         });
 
         modelBuilder.Entity<File>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__File__3213E83FE008ACF0");
-
-            entity.Property(e => e.Id).ValueGeneratedNever();
 
             entity.HasOne(d => d.IdCaseNavigation).WithMany(p => p.Files).HasConstraintName("FK_File_Case");
         });
