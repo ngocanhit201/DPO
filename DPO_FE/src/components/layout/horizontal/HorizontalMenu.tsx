@@ -1,4 +1,6 @@
 // MUI Imports
+import { useContext } from 'react'
+
 import { useTheme } from '@mui/material/styles'
 
 // Type Imports
@@ -21,7 +23,7 @@ import menuRootStyles from '@core/styles/horizontal/menuRootStyles'
 import verticalMenuItemStyles from '@core/styles/vertical/menuItemStyles'
 import verticalNavigationCustomStyles from '@core/styles/vertical/navigationCustomStyles'
 import { UserContext } from '@/components/UserLayout'
-import { useContext } from 'react'
+
 
 type RenderExpandIconProps = {
   level?: number
@@ -52,8 +54,9 @@ const HorizontalMenu = () => {
   // Vars
   const { transitionDuration } = verticalNavOptions
 
-  let user = useContext(UserContext);
-  let isTeacher = user?.account?.idDepartment != null;
+  const user = useContext(UserContext);
+  const isTeacher = user?.account?.idDepartment != null;
+
   return (
     <HorizontalNav
       switchToVertical
@@ -82,7 +85,7 @@ const HorizontalMenu = () => {
       >
         {isTeacher ?
           <>
-            <MenuItem href='/' icon={<i className='ri-home-smile-line' />}>
+            <MenuItem href='/procedure-for-me' icon={<i className='ri-home-smile-line' />}>
               Thủ tục chờ xử lý
             </MenuItem>
             <MenuItem href='/about' icon={<i className='ri-information-line' />}>

@@ -37,7 +37,6 @@ namespace DPO.Controllers
             {
                 return NotFound();
             }
-
             return student;
         }
 

@@ -35,6 +35,7 @@ interface Case {
     comment: string;
     idResultForm: number;
     require: string;
+    files: Files[];
 }
 
 interface CaseProgressDetail {
@@ -124,4 +125,8 @@ interface Files {
     url: string;
     idCases: string[];
 }
-
+interface AllCassInOne {
+    case: Case,
+    procedure: Procedure,
+    student: Student,
+}

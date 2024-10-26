@@ -29,12 +29,53 @@ namespace DPO.Controllers
         {
             return await _context.Cases.ToListAsync();
         }
+        [HttpGet]
+        public async Task<IActionResult> GetCasesByIdDepartment(int queryIdDepartment)
+        {
+            var listCaseAndDepartment =
+               from c in _context.Cases.AsNoTracking()
+               join p in _context.Procedures.AsNoTracking()
+               on c.IdProcedure equals p.Id into procedures
+
+               from p in procedures.DefaultIfEmpty()
+               join op in _context.OrderProcedures.AsNoTracking()
+               on p.Id equals op.IdProcedure into orderProcedures
+
+               from op in orderProcedures.DefaultIfEmpty()
+               join a in _context.Accounts.AsNoTracking()
+               on c.IdAccount equals a.Id into accounts
+
+               from a in accounts.DefaultIfEmpty()
+               join stu in _context.Students.AsNoTracking()
+               on a.IdStudent equals stu.Id into students
+               from stu in students.DefaultIfEmpty()
+               where op.IdDepartment == queryIdDepartment
+
+
+               select new
+               {
+                   Case = c,
+                   Procedure = p,
+                   OrderProcedure = op,
+                   Account = a,
+                   Student = stu
+               };
+            //from c in _context.Cases.AsNoTracking()
+            //    join op in _context.OrderProcedures.AsNoTracking()
+            //    on c.IdProcedure equals op.IdProcedure
+            //    from p in _context.Procedures.AsNoTracking()
+            //    join c.
+            //    where op.IdDepartment == queryIdDepartment
+            //    select new { Case = c};
+
+            return Ok(listCaseAndDepartment);
+        }
 
         // GET: api/Cases/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Case>> GetCase(int id)
         {
-            var @case = await _context.Cases.FindAsync(id);
+            var @case = await _context.Cases.Include(e => e.Files).FirstOrDefaultAsync(e => e.Id == id);
 
             if (@case == null)
             {
