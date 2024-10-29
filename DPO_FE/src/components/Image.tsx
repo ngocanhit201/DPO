@@ -14,7 +14,7 @@ export default function MyImage(prop: imageProp) {
     height="768"
   >
     {({ ref, open }) => (
-      <img className='me-5 ver align-top border-2' width={300} ref={ref} onClick={open} src={url} />
+      <img className='me-5 ver align-top border-2 object-contain' width={300} ref={ref} onClick={open} src={url} />
     )}
   </Item>
 </>

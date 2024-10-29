@@ -9,7 +9,9 @@ import MyImage from '@components/Image'
 import { Gallery, Item } from 'react-photoswipe-gallery'
 import 'photoswipe/dist/photoswipe.css'
 import { makeStyles ,withStyles} from '@mui/styles'
+import Stepper from '@components/Stepper'
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper,  } from '@mui/material'
+import  getCaseProgress from '@/api/getCaseProgress'
 export default function DetailCaseProcedure() {
   const searchParams = useSearchParams()
   const idProcedure = searchParams.get('idProcedure')
@@ -18,6 +20,7 @@ export default function DetailCaseProcedure() {
   const [thisStudent, setThisStudent] = useState<Student | null>(null)
   let [thisProcedure, setThisProcedure] = useState<Procedure | null>(null)
   let [thisCase, setThisCase] = useState<Case | null>(null)
+  let [thisCaseProgress, setThisCaseProgress] = useState<CaseProgress[] | null>(null)
   const router = useRouter()
   const options = {
 
@@ -31,17 +34,19 @@ export default function DetailCaseProcedure() {
       setThisProcedure(pre => dataPro)
       let dataCase = await getCaseById(Number(idCase))
       setThisCase(pre => dataCase)
+      let caseProgress = await getCaseProgress(Number(idCase))
+      setThisCaseProgress(pre => caseProgress)
     }
 
     fetchData()
 
   }, [])
-  console.log('env ', process.env.NEXT_PUBLIC_SERVER)
   const StyledTableCell = withStyles({
     root: {
       fontSize: "16px",
     },
   })(TableCell);
+  console.log('caseProgress', thisCaseProgress)
   return (
     <div className=''>
       <div className="bg-white shadow-md rounded-md p-4  " >
@@ -82,9 +87,11 @@ export default function DetailCaseProcedure() {
           <TableContainer className='shadow-inner my-2' component={Paper}>
             <Table>
               <TableHead>
+              <TableRow>
                 <StyledTableCell className='bg-blue-900 text-white'  colSpan={2} align="center">
                   <h2>Thông tin sinh viên đăng ký</h2>
                 </StyledTableCell>
+              </TableRow>
               </TableHead>
               <TableBody>
                 <TableRow>
@@ -123,10 +130,13 @@ export default function DetailCaseProcedure() {
           <div className=''>
             <Gallery options={options}>
               {thisCase?.files.map((f, index) => (
-                <MyImage url={f.url} />
+                <MyImage url={f.url} key={index} />
               ))}
             </Gallery>
 
+          </div>
+          <div>
+            {thisProcedure && <Stepper caseProgress={thisCaseProgress} />}
           </div>
         </div>
       </div>

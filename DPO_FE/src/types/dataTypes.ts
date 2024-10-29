@@ -38,20 +38,21 @@ interface Case {
     files: Files[];
 }
 
-interface CaseProgressDetail {
+interface CaseProgress {
     id: number;
     idStatus: number;
     idCase: number;
-    idCaseNavigation: string;
-    idStatusNavigation: StatusNavigation;
+    idDepartment: number;
+    idStatusNavigation: Status;
+    idDepartmentNavigation: Department;
 }
 
-interface StatusNavigation {
+interface Status {
     id: number;
     name: string;
     code: string;
-    caseProgresses: string[];
 }
+
 
 interface Account {
     username: string;

@@ -31,5 +31,5 @@ public partial class CaseProgress
 
     [ForeignKey("IdStatus")]
     [InverseProperty("CaseProgresses")]
-    public virtual State? IdStatusNavigation { get; set; }
+    public virtual Status? IdStatusNavigation { get; set; }
 }

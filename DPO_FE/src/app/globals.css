@@ -150,3 +150,7 @@ code {
       width: calc(33.33% - 0.5em);
   }
 }
+.pswp img {
+  max-width: none;
+  object-fit: contain;
+}

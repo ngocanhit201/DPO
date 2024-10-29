@@ -12,9 +12,9 @@ const UserContext = createContext<UserContextType | null>(null);
 
 export default function ({ children }: ChildrenType) {
     useEffect(() => {
-        let setIcon = ` <link rel="icon" type="image/png" href="../../public/images/hocdethaydoi.png" />`
+        let setIcon = ` <link rel="icon" type="image/png" href="images/hocdethaydoi.png" />`
         let header = document.getElementsByTagName('head')[0]
-        header.insertAdjacentHTML('beforeend', setIcon)
+        // header.insertAdjacentHTML('beforeend', setIcon)
     }, [])
     let [account, setAccount] = useState<Account | null>(null);
     useEffect(() => {

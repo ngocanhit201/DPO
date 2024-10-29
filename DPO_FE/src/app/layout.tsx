@@ -12,11 +12,13 @@ import '@/app/globals.css'
 
 import '@assets/iconify-icons/generated-icons.css'
 import UserLayout from '@/components/UserLayout'
-import { useEffect } from 'react'
 
 export const metadata = {
   title: 'Một cửa ĐẠI NAM',
-  description: 'Materialize - Material Next.js Admin Template'
+  description: 'Materialize - Material Next.js Admin Template',
+  icons:{
+    icon: ['images/hocdethaydoi.png']
+  }
 }
 
 const RootLayout = ({ children }: ChildrenType) => {

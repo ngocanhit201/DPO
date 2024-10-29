@@ -33,7 +33,7 @@ public partial class StudentProceduresOnlineContext : DbContext
 
     public virtual DbSet<ResultFrom> ResultFroms { get; set; }
 
-    public virtual DbSet<State> States { get; set; }
+    public virtual DbSet<Status> Statuses { get; set; }
 
     public virtual DbSet<Student> Students { get; set; }
 
@@ -111,6 +111,11 @@ public partial class StudentProceduresOnlineContext : DbContext
                         j.IndexerProperty<int>("IdProcedure").HasColumnName("idProcedure");
                         j.IndexerProperty<int>("IdPaper").HasColumnName("idPaper");
                     });
+        });
+
+        modelBuilder.Entity<Status>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK_State");
         });
 
         modelBuilder.Entity<Student>(entity =>

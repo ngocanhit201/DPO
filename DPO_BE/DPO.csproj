@@ -29,7 +29,7 @@
 
   <ItemGroup>
     <Folder Include="Views\" />
-    <Folder Include="wwwroot\Uploads\" />
+    <Folder Include="wwwroot\Uploads\3\" />
   </ItemGroup>
 
 </Project>
