@@ -70,6 +70,41 @@ namespace DPO.Controllers
 
 			return Ok(listCaseAndDepartment);
 		}
+		[HttpGet]
+		public async Task<IActionResult> GetStatusCaseForDepartment(int idDepartment, int idCase)
+		{
+			var listCaseProgress = _context.CaseProgresses.Where(e => e.IdCase == idCase).OrderBy(e => e.Id).ToList();
+			var message = "";
+			foreach(var item in listCaseProgress)
+			{
+				if (item.IdStatus == MyConstant.Status.HUYID)
+				{
+					message = "Thủ tục đã bị huỷ";
+					break;
+				}
+				if (item.IdDepartment == idDepartment && item.IdStatus == MyConstant.Status.UNSETID)
+				{
+					message = "Duyệt";
+					break;
+				}
+				if (item.IdDepartment == idDepartment && item.IdStatus == MyConstant.Status.DUYETID)
+				{
+					message = "Đã duyệt";
+
+					break;
+				}
+				if (item.IdDepartment != idDepartment && item.IdStatus == MyConstant.Status.UNSETID)
+				{
+					message = "Chờ phòng ban trước xử lý";
+					break;
+				}
+	
+
+
+			}
+
+			return Ok(message);
+		}
 
 		// GET: api/Cases/5
 		[HttpGet("{id}")]

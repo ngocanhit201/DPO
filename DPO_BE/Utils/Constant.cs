@@ -2,10 +2,20 @@
 {
 	public static class MyConstant
 	{
-		public enum UnsetStatus
+		public  class Status()
 		{
-			Id = 200
+			public static int UNSETID = 200;
+			public static int DUYETID = 201;
+			public static int HUYID = 202;
 
 		}
+
+		public enum UnsetStatus
+		{
+			Id = 200,
+
+
+		}
+
 	}
 }
