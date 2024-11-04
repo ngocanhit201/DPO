@@ -17,10 +17,12 @@ namespace DPO.Controllers
 	public class CasesController : ControllerBase
 	{
 		private readonly StudentProceduresOnlineContext _context;
+		private readonly ISendMailService _sendmailservice;
 
-		public CasesController(StudentProceduresOnlineContext context)
+		public CasesController(StudentProceduresOnlineContext context, ISendMailService sendmailservice)
 		{
 			_context = context;
+            _sendmailservice = sendmailservice;
 		}
 
 		// GET: api/Cases
@@ -75,6 +77,11 @@ namespace DPO.Controllers
 		{
 			var listCaseProgress = _context.CaseProgresses.Where(e => e.IdCase == idCase).OrderBy(e => e.Id).ToList();
 			var message = "";
+			var huyStatus = listCaseProgress.FirstOrDefault(e => e.IdStatus == MyConstant.Status.HUYID);
+			if (huyStatus != null) {
+				message = "Thủ tục đã bị huỷ";
+				return Ok(message);
+			}
 			foreach(var item in listCaseProgress)
 			{
 				if (item.IdStatus == MyConstant.Status.HUYID)
@@ -102,10 +109,32 @@ namespace DPO.Controllers
 
 
 			}
+			// check is done
+		
 
 			return Ok(message);
 		}
+		[HttpPost]
+		public async Task<IActionResult> ApproveCase(int idCase,  int idDepartment,  int statusCode)
+		{
+			var thisCase = _context.CaseProgresses.FirstOrDefault(e => e.IdCase == idCase && e.IdDepartment == idDepartment);
+			if (thisCase == null)
+			{
+				return BadRequest("not found case");
+			}
+			thisCase.IdStatus = statusCode;
+			_context.Update(thisCase);
+			_context.SaveChanges();
+			var listCaseProgress = _context.CaseProgresses.Where(e => e.IdCase == idCase).OrderBy(e => e.Id).ToList();
 
+			var countDuyet = listCaseProgress.Where(e => e.IdStatus == MyConstant.Status.DUYETID).Count();
+			if (countDuyet == listCaseProgress.Count())
+			{
+				await GodMethod.SendMailResutl(_sendmailservice);
+
+			}
+			return Ok(statusCode);
+		}
 		// GET: api/Cases/5
 		[HttpGet("{id}")]
 		public async Task<ActionResult<Case>> GetCase(int id)
@@ -229,6 +258,19 @@ namespace DPO.Controllers
 			await _context.SaveChangesAsync();
 
 			return NoContent();
+		}
+		[HttpGet]
+		public async Task<IActionResult> Test()
+		{
+
+			MailContent content = new MailContent
+			{
+				To = "ngocanhit201@gmail.com",
+				Subject = "DNU: Thông Báo Giải Quyết Thủ Tục",
+				Body = GodMethod.MailContent(null, null)
+			};
+			await _sendmailservice.SendMail(content);
+			return Ok("OK");
 		}
 
 		private bool CaseExists(int id)

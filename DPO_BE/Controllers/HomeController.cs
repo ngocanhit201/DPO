@@ -11,7 +11,7 @@ namespace DPO.Controllers
     [ApiController]
     public class HomeController : MyController
     {
-        public HomeController(IMapper mapper, StudentProceduresOnlineContext context) : base(mapper, context)
+		public HomeController(IMapper mapper, StudentProceduresOnlineContext context) : base(mapper, context)
         {
         }
 

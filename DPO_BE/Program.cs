@@ -1,5 +1,6 @@
-using DPO.Mapper;
+﻿using DPO.Mapper;
 using DPO.Models;
+using DPO.Utils;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,7 +19,11 @@ builder.Services.AddDbContext<StudentProceduresOnlineContext>();
 
 // add view
 builder.Services.AddControllersWithViews();
-//
+// mail
+builder.Services.AddOptions();                                         // Kích hoạt Options
+var mailsettings = builder.Configuration.GetSection("MailSettings");  // đọc config
+builder.Services.Configure<MailSettings>(mailsettings);
+builder.Services.AddTransient<ISendMailService, SendMailService>();
 //cors
 builder.Services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
 {

@@ -12,6 +12,7 @@ const colorSchemes = (skin: Skin): Theme['colorSchemes'] => {
           main: '#666CFF',
           light: '#8589FF',
           dark: '#5C61E6',
+          contrastText: '#FFF',
           lighterOpacity: 'rgb(var(--mui-palette-primary-mainChannel) / 0.08)',
           lightOpacity: 'rgb(var(--mui-palette-primary-mainChannel) / 0.16)',
           mainOpacity: 'rgb(var(--mui-palette-primary-mainChannel) / 0.24)',

@@ -45,9 +45,9 @@ export default function page() {
                         <Typography
                             component="h1"
                             variant="h4"
-                            sx={{ width: '100%', fontSize: 'clamp(2rem, 10vw, 2.15rem)' }}
+                            sx={{ width: '100%', fontSize: 'clamp(2rem, 10vw, 2.15rem)',fontWeight:'' }}
                         >
-                            Đăng nhập
+                           Một cửa đại nam
                         </Typography>
                         <FormControl className="w-full">
                             <FormLabel htmlFor="email">Mã sinh viên</FormLabel>
@@ -87,7 +87,7 @@ export default function page() {
                                 onChange={handlePasswordChange}
                             />
                         </FormControl>
-                        <Button variant="contained" className='my-5' onClick={handleLogin}>Đăng nhập</Button>
+                        <Button variant="contained" className='my-5 bg-blue-800' onClick={handleLogin}>Đăng nhập</Button>
                     </Card>
 
                 </div>

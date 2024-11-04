@@ -44,7 +44,7 @@ export default function Layout({
   }, [])
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex bg-contain flex-col h-screen bg-[url('https://dainam.edu.vn/uploads/images/17hpr3gmih4r34oj7evg20240731051008_thump.jpg')]" >
       {domLoaded && (
         <div>
           <div>{children}</div>

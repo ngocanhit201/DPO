@@ -3,10 +3,10 @@ import React, { forwardRef, useImperativeHandle } from 'react';
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
 function App(props: any, ref: any) {
 
     const notify = (type: string, mess: string) => {
+      console.log("noti")
         if (type == 'info') {
             toast.info(mess, {
                 position: "top-center",

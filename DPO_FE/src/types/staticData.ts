@@ -1,9 +1,9 @@
-const statusCase = {
-  unset: {
+export let statusCase = {
+  UNSET: {
     id: 200,
     name: 'Chờ xử lý'
   },
-  duyet: {
+  DUYET: {
     id: 201,
     name: 'Duyệt'
   },

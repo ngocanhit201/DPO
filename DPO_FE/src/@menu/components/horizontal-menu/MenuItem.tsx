@@ -135,7 +135,7 @@ const MenuItem: ForwardRefRenderFunction<HTMLLIElement, MenuItemProps> = (props,
       ref={ref}
       className={classnames(
         { [menuClasses.menuItemRoot]: level === 0 },
-        { [menuClasses.active]: active },
+        { [menuClasses.active ]: active },
         { [menuClasses.disabled]: disabled },
         styles.li,
         className
@@ -182,7 +182,7 @@ const MenuItem: ForwardRefRenderFunction<HTMLLIElement, MenuItemProps> = (props,
 
         {/* Menu Item Label */}
         <StyledMenuLabel
-          className={menuClasses.label}
+          className={menuClasses.label }
           rootStyles={getMenuItemStyles('label')}
           textTruncate={textTruncate}
         >
