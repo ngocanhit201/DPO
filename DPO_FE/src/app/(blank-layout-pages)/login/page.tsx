@@ -29,7 +29,11 @@ export default function page() {
                 // setAccount(pre => account);
                 setCookieNoTime('account', account);
                 user?.setAccount(account);
-                router.push('/home')
+                if(account.idDepartment == null){
+                  router.push('/home')
+                }else{
+                  router.push('/procedure-for-me')
+                }
             }
 
         }
@@ -37,7 +41,7 @@ export default function page() {
         fetchData();
     }
     return (
-        <div className="">
+        <div className=" flex bg-contain flex-col h-screen  bg-[url('https://dainam.edu.vn/uploads/images/17hpr3gmih4r34oj7evg20240731051008_thump.jpg')]">
             <div className="h-screen flex justify-center items-center">
                 <div className="w-[500px]">
                     <Card variant="outlined" sx={{ padding: "70px 50px" }}>
