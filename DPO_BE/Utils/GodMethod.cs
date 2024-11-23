@@ -93,8 +93,10 @@ namespace DPO.Utils
 			// Use string.Join to concatenate the list with '/' as the delimiter
 			return string.Join("/", strings);
 		}
+
 		public static string MailContent(string? title, string? body)
 		{
+			//  simple html template
 
 			if (title == null || body == null)
 			{

@@ -86,6 +86,8 @@ export default function DetailCaseProcedure() {
       }
       let status = await getStatusCaseForDepartment(user?.account?.idDepartment || 0, Number(idCase))
       setStatusAssign(pre => status)
+      let caseProgress = await getCaseProgress(Number(idCase))
+      setThisCaseProgress(pre => caseProgress)
 
     }
     fetchData()

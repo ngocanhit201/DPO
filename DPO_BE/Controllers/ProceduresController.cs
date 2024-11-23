@@ -24,6 +24,34 @@ namespace DPO.Controllers
 			return Ok(procedures);
 		}
 		[HttpGet]
+		public async Task<IActionResult> ListOrderProcedureAllDepartment()
+		{
+			var listDepartment = _context.Departments.OrderBy(e => e.Id).ToList();
+			var listProcedure = _context.Procedures.Include(e => e.OrderProcedures).OrderBy(e => e.Id).ToList();
+			var listProcedureDerpartment = new List<List<string>>() { };
+			listProcedure.ForEach(item =>
+			{
+				var procedureDepartment = new List<string>();
+				procedureDepartment.Add(item.Name);
+				listDepartment.ForEach(department =>
+				{
+					var itemOrderProcedure =  item.OrderProcedures.FirstOrDefault(op => op.IdDepartment == department.Id);
+					if(itemOrderProcedure != null)
+					{
+						procedureDepartment.Add(itemOrderProcedure.Order.ToString());
+					}
+					else
+					{
+						procedureDepartment.Add("_");
+					}
+
+				});
+				listProcedureDerpartment.Add(procedureDepartment);
+			});
+
+			return Ok(listProcedureDerpartment);
+		}
+		[HttpGet]
 		public async Task<IActionResult> ProcedureProgresStatus(int idProcedure, int idCase)
 		{
 			var results = new List<ProcedureProgresStatusModel>();

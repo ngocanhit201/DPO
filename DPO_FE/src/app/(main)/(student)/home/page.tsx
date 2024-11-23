@@ -20,7 +20,7 @@ export default function Page() {
   const user = useContext(UserContext)
   console.log("myuser", user)
   if (user?.account == null) {
-    router.push('/login')
+    router.push('/dashboard')
   };
   function handlePushToDetail(id: number) {
     router.push(`/procedure?id=${id}`);

@@ -88,14 +88,17 @@ const HorizontalMenu = () => {
             <MenuItem href='/procedure-for-me' icon={<i className='ri-home-smile-line' />}>
               Thủ tục chờ xử lý
             </MenuItem>
-            <MenuItem href='/about' icon={<i className='ri-information-line' />}>
-              Thủ tục đã hoàn thành
+            <MenuItem href='/manage-procedure' icon={<i className='ri-information-line' />}>
+              Quản lý thủ tục
+            </MenuItem>
+            <MenuItem href='/create-procedure' icon={<i className='ri-information-line' />}>
+              Tạo thủ tục mới
             </MenuItem>
           </>
           :
           <>
             <>
-              <MenuItem href='/' icon={<i className='ri-home-smile-line' />}>
+              <MenuItem href='/home' icon={<i className='ri-home-smile-line' />}>
                 Danh sách thủ tục
               </MenuItem>
               <MenuItem href='/about' icon={<i className='ri-information-line' />}>

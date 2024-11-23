@@ -15,9 +15,8 @@ import UserLayout from '@/components/UserLayout'
 
 export const metadata = {
   title: 'Một cửa ĐẠI NAM',
-  description: 'Materialize - Material Next.js Admin Template',
   icons:{
-    icon: ['images/hocdethaydoi.png']
+    icon: ['https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Logo_DAI_NAM.png/1128px-Logo_DAI_NAM.png']
   }
 }
 
